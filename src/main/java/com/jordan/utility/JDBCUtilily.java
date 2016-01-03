@@ -40,7 +40,7 @@ public class JDBCUtilily {
 		return conn;
 	}
 	//释放资源
-	public static void release(Object o){
+	public static void release(Object o) throws SQLException{
 		if (o == null){
 			return;
 		}
@@ -58,21 +58,34 @@ public class JDBCUtilily {
 			}
 		} else if (o instanceof Connection){
 			Connection c = (Connection)o;
-			try {
+		
 				if (!c.isClosed()){
 					c.close();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			
 		}
 		
 	}
 	
          public static void release(ResultSet rs, Statement stmt, 
                              Connection conn){
-		release(rs);
-		release(stmt);
-		release(conn);
+		try {
+			release(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			release(stmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			release(conn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

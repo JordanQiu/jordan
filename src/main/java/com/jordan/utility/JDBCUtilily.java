@@ -81,11 +81,6 @@ public class JDBCUtilily {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			release(conn);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 }
